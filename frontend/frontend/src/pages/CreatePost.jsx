@@ -16,7 +16,7 @@ const navigate = useNavigate()
     
 
     const formData = new FormData(e.target)
-     const  res =axios.post("https://your-render-url.onrender.com/create_post",formData)
+     const  res =axios.post("https://backend-project-01-qeb2.onrender.com/create_post",formData)
     .then((res)=>{
       console.log(res);
       setInput("")
