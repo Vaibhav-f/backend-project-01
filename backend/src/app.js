@@ -18,6 +18,15 @@ app.use(cors())
 
 app.post('/create_post',upload.single("image"),async(req,res)=>{
         
+      console.log(req.file);
+    console.log(req.body);
+
+    if (!req.file) {
+        return res.status(400).json({
+            message: "Image not received"
+        });
+    }
+
     const result = await uploadFile(req.file.buffer)
 
     const post = await postModel.create({

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -7,17 +7,21 @@ import { useNavigate } from 'react-router-dom'
 const CreatePost = () => {
 
 
-
+const [input, setInput] = useState("")
 const navigate = useNavigate()
 
   const submitHandler = async(e)=>{
     e.preventDefault()
+    console.log("click");
+    
 
-    const formData = new formData(e.target)
-    axios.get("localhost:3000/create_post")
+    const formData = new FormData(e.target)
+    axios.post("http://localhost:3000/create_post",formData)
     .then((res)=>{
       console.log(res);
-      navigation("/feed")
+      setInput("")
+        e.target.reset();
+      navigate("/feed")
       
     })
   }
@@ -29,8 +33,11 @@ const navigate = useNavigate()
             onSubmit={submitHandler}
             className='flex flex-col gap-3 py-8 '>
 
-                <input className='text-xl ml-13 ' type="file" name='image' accept='image' />
-                <input className='placeholder:text-2xl placeholder:px-5 border-none w-80 ml-8 py-3 text-2xl' type="text" name="caption" id="" required placeholder='Caption' />
+                <input className='text-xl ml-13 ' type="file" name='image' accept='image/*' />
+                <input
+                 value={input}
+                  onChange={(e) => setInput(e.target.value) }
+                className='placeholder:text-2xl placeholder:px-5 border-2 border-cyan-400  rounded-2xl  w-80 ml-8 py-3 px-8 text-2xl' type="text" name="caption" id="" required placeholder='Caption' />
                 <button className='bg-cyan-500 w-40 rounded-2xl h-10 text-2xl ml-13 cursor-pointer' type='submit'>Submit </button>
 
             </form>
