@@ -13,9 +13,13 @@ const navigate = useNavigate()
   const submitHandler = async(e)=>{
     e.preventDefault()
     console.log("click");
+   
     
 
     const formData = new FormData(e.target)
+     for (let pair of formData.entries()) {
+  console.log(pair[0], pair[1]);
+}
      const  res =axios.post("https://backend-project-01-qeb2.onrender.com/create_post",formData)
     .then((res)=>{
       console.log(res);
