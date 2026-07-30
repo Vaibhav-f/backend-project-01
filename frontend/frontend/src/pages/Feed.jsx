@@ -6,7 +6,7 @@ const Feed = () => {
 useEffect(() => {
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/post");
+      const res = await axios.get("https://backend-project-01-qeb2.onrender.com/post");
       setPosts(res.data.posts);
     } catch (err) {
       console.log(err);
